@@ -1,5 +1,58 @@
 [gd_scene format=3 uid="uid://5wfwvdtfa4y4"]
 
+[ext_resource type="Script" uid="uid://bnrwjhwmuf4hg" path="res://scripts/main_game.gd" id="1_0rdsr"]
+[ext_resource type="Texture2D" uid="uid://co068e173snsi" path="res://assets/Clear background.png" id="1_s3esy"]
+[ext_resource type="Texture2D" uid="uid://dh6rhr5qawx42" path="res://assets/Ground.png" id="2_72e8q"]
+[ext_resource type="Texture2D" uid="uid://de2wmkscsoywt" path="res://assets/Tree.png" id="3_d2op2"]
+[ext_resource type="FontFile" uid="uid://cwe5bpa0hnu8l" path="res://assets/Geo-Regular.ttf" id="5_ipu61"]
+
 [node name="Main game" type="Node2D" unique_id=2099000414]
+script = ExtResource("1_0rdsr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249674175]
+
+[node name="ClearBackground" type="Sprite2D" parent="CanvasLayer" unique_id=607339916]
+position = Vector2(320, 180)
+texture = ExtResource("1_s3esy")
+
+[node name="Ground" type="Sprite2D" parent="CanvasLayer" unique_id=813350954]
+position = Vector2(320, 310)
+texture = ExtResource("2_72e8q")
+
+[node name="Tree" type="TextureButton" parent="CanvasLayer" unique_id=1902339895]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.25
+offset_top = -87.25
+offset_right = 91.25
+offset_bottom = 95.25
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_d2op2")
+stretch_mode = 0
+
+[node name="SaveUPD" type="Timer" parent="CanvasLayer/Tree" unique_id=372278506]
+autostart = true
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer" unique_id=235533328]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.0
+offset_top = 4.0
+offset_right = 149.0
+offset_bottom = 59.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_ipu61")
+theme_override_font_sizes/normal_font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
+[connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
+[connection signal="timeout" from="CanvasLayer/Tree/SaveUPD" to="." method="_on_save_upd_timeout"]
