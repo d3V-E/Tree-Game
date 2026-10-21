@@ -4,7 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://co068e173snsi" path="res://assets/Clear background.png" id="1_s3esy"]
 [ext_resource type="Texture2D" uid="uid://dh6rhr5qawx42" path="res://assets/Ground.png" id="2_72e8q"]
 [ext_resource type="Texture2D" uid="uid://de2wmkscsoywt" path="res://assets/Tree.png" id="3_d2op2"]
-[ext_resource type="FontFile" uid="uid://cwe5bpa0hnu8l" path="res://assets/Geo-Regular.ttf" id="5_ipu61"]
+[ext_resource type="FontFile" uid="uid://cwe5bpa0hnu8l" path="res://assets/fonts/Geo-Regular.ttf" id="5_ipu61"]
+[ext_resource type="Texture2D" uid="uid://cpkksi76fyiev" path="res://assets/Stats.png" id="6_ygxny"]
+[ext_resource type="Texture2D" uid="uid://cfxn65feljqts" path="res://assets/Log.png" id="7_wi4c7"]
+[ext_resource type="FontFile" uid="uid://8c6j0tkelvwg" path="res://assets/fonts/SpaceGrotesk-VariableFont_wght.ttf" id="8_70vka"]
+[ext_resource type="Texture2D" uid="uid://cqcrtco4e1slj" path="res://assets/Convert.png" id="9_o6v7o"]
+[ext_resource type="Texture2D" uid="uid://b5yn2tcxfdrcn" path="res://assets/weather/Cloudy.png" id="9_sp04v"]
+[ext_resource type="Texture2D" uid="uid://c5p22e2er4d3p" path="res://assets/weather/Sunny.png" id="10_ihbck"]
+[ext_resource type="FontFile" uid="uid://bvms8h4edljip" path="res://assets/fonts/Quantico-Bold.ttf" id="10_wjob3"]
+[ext_resource type="Texture2D" uid="uid://ccwwa2nmmt81g" path="res://assets/Close.png" id="11_8xp80"]
+[ext_resource type="Texture2D" uid="uid://bgb21a51lb2pk" path="res://assets/weather/Rain.png" id="11_vnsdt"]
+[ext_resource type="Texture2D" uid="uid://5lgao53anued" path="res://assets/Confirm Convert.png" id="12_o6v7o"]
 
 [node name="Main game" type="Node2D" unique_id=2099000414]
 script = ExtResource("1_0rdsr")
@@ -18,24 +28,6 @@ texture = ExtResource("1_s3esy")
 [node name="Ground" type="Sprite2D" parent="CanvasLayer" unique_id=813350954]
 position = Vector2(320, 310)
 texture = ExtResource("2_72e8q")
-
-[node name="Tree" type="TextureButton" parent="CanvasLayer" unique_id=1902339895]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -91.25
-offset_top = -87.25
-offset_right = 91.25
-offset_bottom = 95.25
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("3_d2op2")
-stretch_mode = 0
-
-[node name="SaveUPD" type="Timer" parent="CanvasLayer/Tree" unique_id=372278506]
-autostart = true
 
 [node name="Score" type="RichTextLabel" parent="CanvasLayer" unique_id=235533328]
 anchors_preset = 5
@@ -53,6 +45,128 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Tree" type="TextureButton" parent="CanvasLayer" unique_id=1902339895]
+anchors_preset = -1
+anchor_left = 0.35700002
+anchor_top = 0.25800002
+anchor_right = 0.643
+anchor_bottom = 0.76500005
+offset_left = 0.269989
+offset_top = -0.13000488
+offset_right = -0.27001953
+offset_bottom = -0.15002441
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_d2op2")
+stretch_mode = 0
+
+[node name="SaveUPD" type="Timer" parent="CanvasLayer/Tree" unique_id=372278506]
+autostart = true
+
+[node name="Stats" type="Sprite2D" parent="CanvasLayer" unique_id=1987372472]
+position = Vector2(104.416664, 46.75)
+scale = Vector2(1.1533333, 1.1533333)
+texture = ExtResource("6_ygxny")
+
+[node name="Log Header" type="RichTextLabel" parent="CanvasLayer/Stats" unique_id=470216563]
+offset_left = -20.303467
+offset_top = -9.320808
+offset_right = 15.2456665
+offset_bottom = 9.754341
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "LOGS"
+
+[node name="Log Count" type="RichTextLabel" parent="CanvasLayer/Stats" unique_id=58380009]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.988434
+offset_top = -33.598267
+offset_right = -5.4913177
+offset_bottom = 6.286129
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_ipu61")
+theme_override_font_sizes/normal_font_size = 24
+text = "0"
+vertical_alignment = 1
+
+[node name="Log" type="TextureButton" parent="CanvasLayer/Stats" unique_id=2030129797]
+offset_left = -19.436417
+offset_top = -38.800587
+offset_right = 13.511566
+offset_bottom = -5.852604
+texture_normal = ExtResource("7_wi4c7")
+
+[node name="Cloudy" type="Sprite2D" parent="CanvasLayer/Stats" unique_id=444764310]
+position = Vector2(-55.8526, -10.187864)
+scale = Vector2(1.3547688, 1.3547688)
+texture = ExtResource("9_sp04v")
+
+[node name="Sunny" type="Sprite2D" parent="CanvasLayer/Stats" unique_id=1024054471]
+position = Vector2(-55.8526, -10.187864)
+scale = Vector2(1.3547688, 1.3547688)
+texture = ExtResource("10_ihbck")
+
+[node name="Rain" type="Sprite2D" parent="CanvasLayer/Stats" unique_id=1164517397]
+position = Vector2(-55.8526, -10.187864)
+scale = Vector2(1.3547688, 1.3547688)
+texture = ExtResource("11_vnsdt")
+
+[node name="Convert" type="Sprite2D" parent="CanvasLayer" unique_id=13254488]
+position = Vector2(320.6667, 184)
+scale = Vector2(0.39, 0.38999996)
+texture = ExtResource("9_o6v7o")
+
+[node name="Header" type="RichTextLabel" parent="CanvasLayer/Convert" unique_id=1557404471]
+offset_left = -365.812
+offset_top = -282.05127
+offset_right = 139.3162
+offset_bottom = -202.56412
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 36
+text = "CONVERT ( SCORE -> LOGS )"
+vertical_alignment = 1
+
+[node name="Close Convert" type="TextureButton" parent="CanvasLayer/Convert" unique_id=839058266]
+offset_left = 303.4188
+offset_top = -279.4872
+offset_right = 379.0085
+offset_bottom = -203.89749
+texture_normal = ExtResource("11_8xp80")
+stretch_mode = 0
+
+[node name="Convert Confirm" type="TextureButton" parent="CanvasLayer/Convert" unique_id=1355383976]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -526.923
+offset_top = -108.97427
+offset_right = -273.07703
+offset_bottom = -24.358917
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("12_o6v7o")
+stretch_mode = 0
+
+[node name="Info" type="RichTextLabel" parent="CanvasLayer/Convert" unique_id=1620477750]
+offset_left = -368.37613
+offset_top = -171.79489
+offset_right = 372.6495
+offset_bottom = -53.84616
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 26
+text = "EXAMPLE"
+
 [connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
 [connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
 [connection signal="timeout" from="CanvasLayer/Tree/SaveUPD" to="." method="_on_save_upd_timeout"]
+[connection signal="button_down" from="CanvasLayer/Stats/Log" to="." method="_on_log_button_down"]
+[connection signal="button_up" from="CanvasLayer/Stats/Log" to="." method="_on_log_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/Close Convert" to="." method="_on_close_convert_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/Close Convert" to="." method="_on_close_convert_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/Convert Confirm" to="." method="_on_convert_confirm_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/Convert Confirm" to="." method="_on_convert_confirm_button_up"]
