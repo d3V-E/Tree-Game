@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://ccwwa2nmmt81g" path="res://assets/Close.png" id="11_8xp80"]
 [ext_resource type="Texture2D" uid="uid://bgb21a51lb2pk" path="res://assets/weather/Rain.png" id="11_vnsdt"]
 [ext_resource type="Texture2D" uid="uid://5lgao53anued" path="res://assets/Confirm Convert.png" id="12_o6v7o"]
+[ext_resource type="Texture2D" uid="uid://bijdd3lyg2qw1" path="res://assets/SHOP Button.png" id="16_ihbck"]
+[ext_resource type="Texture2D" uid="uid://jbh5t1ie0rxb" path="res://assets/Blank.png" id="17_vnsdt"]
 
 [node name="Main game" type="Node2D" unique_id=2099000414]
 script = ExtResource("1_0rdsr")
@@ -100,21 +102,37 @@ offset_bottom = -5.852604
 texture_normal = ExtResource("7_wi4c7")
 
 [node name="Cloudy" type="Sprite2D" parent="CanvasLayer/Stats" unique_id=444764310]
-position = Vector2(-55.8526, -10.187864)
+position = Vector2(-55.852604, -9.320812)
 scale = Vector2(1.3547688, 1.3547688)
 texture = ExtResource("9_sp04v")
 
 [node name="Sunny" type="Sprite2D" parent="CanvasLayer/Stats" unique_id=1024054471]
-position = Vector2(-55.8526, -10.187864)
+position = Vector2(-55.852604, -9.320812)
 scale = Vector2(1.3547688, 1.3547688)
 texture = ExtResource("10_ihbck")
 
 [node name="Rain" type="Sprite2D" parent="CanvasLayer/Stats" unique_id=1164517397]
-position = Vector2(-55.8526, -10.187864)
+position = Vector2(-55.852604, -9.320812)
 scale = Vector2(1.3547688, 1.3547688)
 texture = ExtResource("11_vnsdt")
 
+[node name="Weather Update" type="Timer" parent="CanvasLayer/Stats" unique_id=1794564411]
+wait_time = 300.0
+autostart = true
+
+[node name="Weather Header" type="RichTextLabel" parent="CanvasLayer/Stats" unique_id=2080791021]
+offset_left = -83.59827
+offset_top = 14.956646
+offset_right = -27.239883
+offset_bottom = 33.280346
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 10
+text = "Cloudy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Convert" type="Sprite2D" parent="CanvasLayer" unique_id=13254488]
+visible = false
 position = Vector2(320.6667, 184)
 scale = Vector2(0.39, 0.38999996)
 texture = ExtResource("9_o6v7o")
@@ -161,12 +179,33 @@ theme_override_fonts/normal_font = ExtResource("8_70vka")
 theme_override_font_sizes/normal_font_size = 26
 text = "EXAMPLE"
 
+[node name="Shop" type="TextureButton" parent="CanvasLayer" unique_id=1647174120]
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.85
+anchor_right = 0.98600006
+anchor_bottom = 0.96900004
+offset_right = -0.258667
+offset_bottom = 0.15997314
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("16_ihbck")
+stretch_mode = 0
+
+[node name="Weather Info" type="Sprite2D" parent="CanvasLayer" unique_id=848353339]
+position = Vector2(154, 96)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("17_vnsdt")
+
 [connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
 [connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
 [connection signal="timeout" from="CanvasLayer/Tree/SaveUPD" to="." method="_on_save_upd_timeout"]
 [connection signal="button_down" from="CanvasLayer/Stats/Log" to="." method="_on_log_button_down"]
 [connection signal="button_up" from="CanvasLayer/Stats/Log" to="." method="_on_log_button_up"]
+[connection signal="timeout" from="CanvasLayer/Stats/Weather Update" to="." method="_on_weather_update_timeout"]
 [connection signal="button_down" from="CanvasLayer/Convert/Close Convert" to="." method="_on_close_convert_button_down"]
 [connection signal="button_up" from="CanvasLayer/Convert/Close Convert" to="." method="_on_close_convert_button_up"]
 [connection signal="button_down" from="CanvasLayer/Convert/Convert Confirm" to="." method="_on_convert_confirm_button_down"]
 [connection signal="button_up" from="CanvasLayer/Convert/Convert Confirm" to="." method="_on_convert_confirm_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shop" to="." method="_on_shop_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shop" to="." method="_on_shop_button_up"]

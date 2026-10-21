@@ -9,7 +9,10 @@ const save_path = "user://userdata.save"
 @onready var closeconvert : TextureButton = $"CanvasLayer/Convert/Close Convert"
 @onready var convertconfirm: TextureButton = $"CanvasLayer/Convert/Convert Confirm"
 @onready var convertdg: Sprite2D = $CanvasLayer/Convert
-
+@onready var sun: Sprite2D = $CanvasLayer/Stats/Sunny
+@onready var rain: Sprite2D = $CanvasLayer/Stats/Rain
+@onready var cloud: Sprite2D = $CanvasLayer/Stats/Cloudy
+@onready var shopopen: TextureButton = $CanvasLayer/Shop
 
 
 
@@ -18,6 +21,26 @@ var wood = 0
 var weather = "Nothing"
 var weathermulti = 1.0
 
+var rarities = {"Cloudy" : 1000,
+				"Sunny" : 500,
+				"Rain" : 250}
+
+var rng = RandomNumberGenerator.new()
+
+func get_weather():
+	rng.randomize()
+	
+	var sum = 0
+	
+	for n in rarities:
+		sum += rarities[n]
+		
+	var item = rng.randi_range(0 , sum)
+	
+	for n in rarities:
+		if item <= rarities[n]:
+			return n
+		item -= rarities[n]
 
 
 
@@ -61,9 +84,11 @@ func _ready():
 	convertlog.pivot_offset = convertlog.size / 2
 	closeconvert.pivot_offset = closeconvert.size / 2
 	convertconfirm.pivot_offset = convertconfirm.size / 2
+	shopopen.pivot_offset = shopopen.size / 2
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	hconverttree()
+	weatherupd()
 
 
 
@@ -161,3 +186,63 @@ func _on_close_convert_button_up():
 	var tween = get_tree().create_tween()
 	tween.tween_property(closeconvert , "scale" , Vector2(1 , 1) , .1)
 	hconverttree()
+
+
+
+
+
+func _on_weather_update_timeout():
+	weatherupd()
+
+
+func sunw():
+	sun.visible = true
+	rain.visible = false
+	cloud.visible = false
+	weathermulti = 1.5
+
+
+func cloudyw():
+	sun.visible = false
+	rain.visible = false
+	cloud.visible = true
+	weathermulti = 1.0
+
+
+func rainw():
+	sun.visible = false
+	rain.visible = true
+	cloud.visible = false
+	weathermulti = 0.7
+
+
+func weatherupd():
+	weather = get_weather()
+	if weather == "Sunny":
+		sunw()
+		$"CanvasLayer/Stats/Weather Header".text = "Sunny"
+	elif weather == "Cloudy":
+		cloudyw()
+		$"CanvasLayer/Stats/Weather Header".text = "Cloudy"
+	elif weather == "Rain":
+		rainw()
+		$"CanvasLayer/Stats/Weather Header".text = "Rainy"
+
+
+
+
+
+
+
+func _on_shop_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(shopopen , "scale" , Vector2(.9 ,.9) , .1)
+
+
+
+
+
+
+func _on_shop_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(shopopen , "scale" , Vector2(1 , 1), .1)
