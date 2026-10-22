@@ -20,7 +20,12 @@ const save_path = "user://userdata.save"
 @onready var xhalf: TextureButton = $CanvasLayer/Convert/half
 @onready var xplus: TextureButton = $CanvasLayer/Convert/plus
 @onready var xminus : TextureButton = $CanvasLayer/Convert/minus
-
+@onready var sunnyb: Sprite2D = $CanvasLayer/ClearBackground
+@onready var rainb: Sprite2D = $CanvasLayer/Rain
+@onready var cloudyb : Sprite2D = $CanvasLayer/Cloudy
+@onready var shopanim: AnimationPlayer = $CanvasLayer/Shopline/AnimationPlayer
+@onready var shopclose: TextureButton = $"CanvasLayer/Shopline/Shop Close"
+@onready var buyone: TextureButton = $"CanvasLayer/Shopline/VBoxContainer/Click + 1/Buy1"
 
 
 
@@ -33,6 +38,8 @@ var weather = "Nothing"
 var weathermulti = 1.0
 var change = 1
 var converttext = 0
+var click = 1
+var clickone = 75
 
 
 var rarities = {"Cloudy" : 1000,
@@ -106,6 +113,8 @@ func _ready():
 	xhundred.pivot_offset = xhundred.size / 2
 	xmax.pivot_offset = xmax.size / 2
 	xhalf.pivot_offset = xhalf.size / 2
+	shopclose.pivot_offset = shopclose.size / 2
+	buyone.pivot_offset = buyone.size / 2
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	hconverttree()
@@ -139,7 +148,7 @@ func _on_tree_button_up():
 	if convertdg.visible == false:
 		var tween = get_tree().create_tween()
 		tween.tween_property(tree , "scale" , Vector2(1 , 1), .1)
-		score += 1
+		score += click
 		$CanvasLayer/Score.text = str(score)
 		emit_signal("score_changed")
 		save_data()
@@ -157,7 +166,7 @@ func _on_save_upd_timeout():
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	save_data()
 	$CanvasLayer/Convert/Amnt.text = "Logs Earned = " + str(converttext * weathermulti)
-
+	
 
 
 
@@ -191,10 +200,11 @@ func _on_convert_confirm_button_up():
 	var tween = get_tree().create_tween()
 	tween.tween_property(convertconfirm , "scale" , Vector2(1 , 1), .1)
 	$CanvasLayer/Convert/Info.text = "SCORE = " + str(score) + " and LOGS = " + str(wood) + "\nWeather = " + str(weather) + " , Multiplier = " + str(weathermulti)
-	score -= converttext
-	wood += (converttext * weathermulti)
-	converttext = 0
-	$CanvasLayer/Convert/Ctext.text = str(converttext)
+	if score >= converttext:
+		score -= converttext
+		wood += (converttext * weathermulti)
+		converttext = 0
+		$CanvasLayer/Convert/Ctext.text = str(converttext)
 
 
 
@@ -228,21 +238,33 @@ func sunw():
 	sun.visible = true
 	rain.visible = false
 	cloud.visible = false
+	rainb.visible = false
+	cloudyb.visible = false
+	sunnyb.visible = true
 	weathermulti = 1.5
+	$CanvasLayer/Stats/InfoM.text = "Multiplier = " + str(weathermulti)
 
 
 func cloudyw():
 	sun.visible = false
 	rain.visible = false
 	cloud.visible = true
+	rainb.visible = false
+	cloudyb.visible = true
+	sunnyb.visible = false
 	weathermulti = 1.0
+	$CanvasLayer/Stats/InfoM.text = "Multiplier = " + str(weathermulti)
 
 
 func rainw():
 	sun.visible = false
 	rain.visible = true
 	cloud.visible = false
+	rainb.visible = true
+	cloudyb.visible = false
+	sunnyb.visible = false
 	weathermulti = 0.7
+	$CanvasLayer/Stats/InfoM.text = "Multiplier = " + str(weathermulti)
 
 
 func weatherupd():
@@ -275,6 +297,8 @@ func _on_shop_button_down():
 func _on_shop_button_up():
 	var tween = get_tree().create_tween()
 	tween.tween_property(shopopen , "scale" , Vector2(1 , 1), .1)
+	shopopen.visible = false
+	shopanim.play("Shop Transition")
 
 
 
@@ -409,3 +433,42 @@ func _on_half_button_up():
 	tween.tween_property(xhalf , "scale" , Vector2(1 , 1) ,.1)
 	change = (score / 2)
 	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
+
+
+
+
+
+func _on_shop_close_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(shopclose , "scale" , Vector2(.9 , .9) ,.1)
+
+
+
+
+
+func _on_shop_close_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(shopclose , "scale" , Vector2(1 , 1), .1)
+	shopanim.play("Shop Close Animation")
+	shopopen.visible = true
+
+
+
+
+
+func _on_buy_1_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buyone , "scale" , Vector2(.9 ,.9) , .1)
+
+
+
+
+
+func _on_buy_1_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buyone , "scale" , Vector2(1 , 1) , .1)
+	if wood >= clickone:
+		wood -= clickone
+		click += 1
+		clickone += 25
+		$"CanvasLayer/Shopline/VBoxContainer/Click + 1/Cost".text ="COST = " + str(clickone)

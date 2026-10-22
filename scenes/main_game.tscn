@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://bnrwjhwmuf4hg" path="res://scripts/main_game.gd" id="1_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://co068e173snsi" path="res://assets/Clear background.png" id="1_s3esy"]
 [ext_resource type="Texture2D" uid="uid://dh6rhr5qawx42" path="res://assets/Ground.png" id="2_72e8q"]
+[ext_resource type="Texture2D" uid="uid://cev4jmnyotgj" path="res://assets/Rain.png" id="2_on6n6"]
 [ext_resource type="Texture2D" uid="uid://de2wmkscsoywt" path="res://assets/Tree.png" id="3_d2op2"]
+[ext_resource type="Texture2D" uid="uid://bm55fc6o7m68d" path="res://assets/Cloudy.png" id="3_x3ega"]
 [ext_resource type="FontFile" uid="uid://cwe5bpa0hnu8l" path="res://assets/fonts/Geo-Regular.ttf" id="5_ipu61"]
 [ext_resource type="Texture2D" uid="uid://cpkksi76fyiev" path="res://assets/Stats.png" id="6_ygxny"]
 [ext_resource type="Texture2D" uid="uid://cfxn65feljqts" path="res://assets/Log.png" id="7_wi4c7"]
@@ -18,17 +20,79 @@
 [ext_resource type="Texture2D" uid="uid://bijdd3lyg2qw1" path="res://assets/SHOP Button.png" id="16_ihbck"]
 [ext_resource type="Texture2D" uid="uid://bfownvbj287l2" path="res://assets/plus.png" id="16_ikqpi"]
 [ext_resource type="Texture2D" uid="uid://nmvc1l58um5n" path="res://assets/minus.png" id="17_cybgu"]
-[ext_resource type="Texture2D" uid="uid://jbh5t1ie0rxb" path="res://assets/Blank.png" id="17_vnsdt"]
 [ext_resource type="Texture2D" uid="uid://ctl0jp00juewf" path="res://assets/x1.png" id="18_wdxbp"]
 [ext_resource type="Texture2D" uid="uid://bq1o0ksximywn" path="res://assets/x2.png" id="19_on6n6"]
 [ext_resource type="Texture2D" uid="uid://b5e16n1e2dsmt" path="res://assets/x3.png" id="20_x3ega"]
 [ext_resource type="Texture2D" uid="uid://dtldlbpdpfn7t" path="res://assets/MAX.png" id="21_dcudo"]
 [ext_resource type="Texture2D" uid="uid://h45oywd6tkwo" path="res://assets/half.png" id="22_307no"]
+[ext_resource type="Texture2D" uid="uid://b4hdna142awsm" path="res://assets/shopline.png" id="26_on6n6"]
+[ext_resource type="Texture2D" uid="uid://1jlsik8bryjy" path="res://assets/Shop Option.png" id="27_x3ega"]
+[ext_resource type="Texture2D" uid="uid://cuukj16u2hh3g" path="res://assets/Buy button.png" id="28_dcudo"]
+
+[sub_resource type="Animation" id="Animation_x3ega"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(750, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_dcudo"]
+resource_name = "Shop Close Animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(520, 180), Vector2(750, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_307no"]
+resource_name = "Shop Transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(750, 180), Vector2(520, 180)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rr87q"]
+_data = {
+&"RESET": SubResource("Animation_x3ega"),
+&"Shop Close Animation": SubResource("Animation_dcudo"),
+&"Shop Transition": SubResource("Animation_307no")
+}
 
 [node name="Main game" type="Node2D" unique_id=2099000414]
 script = ExtResource("1_0rdsr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249674175]
+
+[node name="Rain" type="Sprite2D" parent="CanvasLayer" unique_id=472426392]
+position = Vector2(320, 180)
+texture = ExtResource("2_on6n6")
+
+[node name="Cloudy" type="Sprite2D" parent="CanvasLayer" unique_id=2079308551]
+position = Vector2(320, 180)
+texture = ExtResource("3_x3ega")
 
 [node name="ClearBackground" type="Sprite2D" parent="CanvasLayer" unique_id=607339916]
 position = Vector2(320, 180)
@@ -137,6 +201,16 @@ theme_override_fonts/normal_font = ExtResource("10_wjob3")
 theme_override_font_sizes/normal_font_size = 10
 text = "Cloudy"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoM" type="RichTextLabel" parent="CanvasLayer/Stats" unique_id=843298518]
+offset_left = -20.303469
+offset_top = 12.355492
+offset_right = 82.00868
+offset_bottom = 33.16474
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 10
+text = "Multiplier = "
 vertical_alignment = 1
 
 [node name="Convert" type="Sprite2D" parent="CanvasLayer" unique_id=13254488]
@@ -287,11 +361,66 @@ grow_vertical = 0
 texture_normal = ExtResource("16_ihbck")
 stretch_mode = 0
 
-[node name="Weather Info" type="Sprite2D" parent="CanvasLayer" unique_id=848353339]
-visible = false
-position = Vector2(154, 96)
-scale = Vector2(1.3333334, 1.3333334)
-texture = ExtResource("17_vnsdt")
+[node name="Shopline" type="Sprite2D" parent="CanvasLayer" unique_id=942709572]
+position = Vector2(750, 180)
+texture = ExtResource("26_on6n6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Shopline" unique_id=522921528]
+libraries/ = SubResource("AnimationLibrary_rr87q")
+
+[node name="Shop Close" type="TextureButton" parent="CanvasLayer/Shopline" unique_id=1069653770]
+offset_left = 65.0
+offset_top = -149.0
+offset_right = 99.0
+offset_bottom = -115.0
+texture_normal = ExtResource("11_8xp80")
+stretch_mode = 0
+
+[node name="Shop Header" type="RichTextLabel" parent="CanvasLayer/Shopline" unique_id=1418324156]
+offset_left = -97.0
+offset_top = -150.0
+offset_right = 58.0
+offset_bottom = -116.0
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 22
+text = "SHOP"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Shopline" unique_id=884708750]
+offset_left = -101.0
+offset_top = -112.0
+offset_right = 103.0
+offset_bottom = 152.0
+
+[node name="Click + 1" type="Sprite2D" parent="CanvasLayer/Shopline/VBoxContainer" unique_id=1847787695]
+position = Vector2(101, 59)
+texture = ExtResource("27_x3ega")
+
+[node name="+1 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/VBoxContainer/Click + 1" unique_id=1325316510]
+offset_left = -98.0
+offset_top = -56.0
+offset_right = 98.0
+offset_bottom = -22.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 26
+text = "+ 1 Click Power"
+
+[node name="Cost" type="RichTextLabel" parent="CanvasLayer/Shopline/VBoxContainer/Click + 1" unique_id=1093624889]
+offset_left = -96.0
+offset_top = -24.0
+offset_right = 98.0
+offset_bottom = 1.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "COST = 75"
+
+[node name="Buy1" type="TextureButton" parent="CanvasLayer/Shopline/VBoxContainer/Click + 1" unique_id=600202110]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 93.0
+offset_bottom = 52.0
+texture_normal = ExtResource("28_dcudo")
+stretch_mode = 0
 
 [connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
 [connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
@@ -319,3 +448,7 @@ texture = ExtResource("17_vnsdt")
 [connection signal="button_up" from="CanvasLayer/Convert/half" to="." method="_on_half_button_up"]
 [connection signal="button_down" from="CanvasLayer/Shop" to="." method="_on_shop_button_down"]
 [connection signal="button_up" from="CanvasLayer/Shop" to="." method="_on_shop_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/Shop Close" to="." method="_on_shop_close_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/Shop Close" to="." method="_on_shop_close_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/VBoxContainer/Click + 1/Buy1" to="." method="_on_buy_1_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/VBoxContainer/Click + 1/Buy1" to="." method="_on_buy_1_button_up"]
