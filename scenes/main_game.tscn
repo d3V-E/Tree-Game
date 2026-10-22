@@ -16,7 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://bgb21a51lb2pk" path="res://assets/weather/Rain.png" id="11_vnsdt"]
 [ext_resource type="Texture2D" uid="uid://5lgao53anued" path="res://assets/Confirm Convert.png" id="12_o6v7o"]
 [ext_resource type="Texture2D" uid="uid://bijdd3lyg2qw1" path="res://assets/SHOP Button.png" id="16_ihbck"]
+[ext_resource type="Texture2D" uid="uid://bfownvbj287l2" path="res://assets/plus.png" id="16_ikqpi"]
+[ext_resource type="Texture2D" uid="uid://nmvc1l58um5n" path="res://assets/minus.png" id="17_cybgu"]
 [ext_resource type="Texture2D" uid="uid://jbh5t1ie0rxb" path="res://assets/Blank.png" id="17_vnsdt"]
+[ext_resource type="Texture2D" uid="uid://ctl0jp00juewf" path="res://assets/x1.png" id="18_wdxbp"]
+[ext_resource type="Texture2D" uid="uid://bq1o0ksximywn" path="res://assets/x2.png" id="19_on6n6"]
+[ext_resource type="Texture2D" uid="uid://b5e16n1e2dsmt" path="res://assets/x3.png" id="20_x3ega"]
+[ext_resource type="Texture2D" uid="uid://dtldlbpdpfn7t" path="res://assets/MAX.png" id="21_dcudo"]
+[ext_resource type="Texture2D" uid="uid://h45oywd6tkwo" path="res://assets/half.png" id="22_307no"]
 
 [node name="Main game" type="Node2D" unique_id=2099000414]
 script = ExtResource("1_0rdsr")
@@ -63,6 +70,7 @@ texture_normal = ExtResource("3_d2op2")
 stretch_mode = 0
 
 [node name="SaveUPD" type="Timer" parent="CanvasLayer/Tree" unique_id=372278506]
+wait_time = 0.5
 autostart = true
 
 [node name="Stats" type="Sprite2D" parent="CanvasLayer" unique_id=1987372472]
@@ -161,10 +169,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -526.923
-offset_top = -108.97427
-offset_right = -273.07703
-offset_bottom = -24.358917
+offset_left = -770.5127
+offset_top = -108.97421
+offset_right = -516.66675
+offset_bottom = -24.358856
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("12_o6v7o")
@@ -178,6 +186,93 @@ offset_bottom = -53.84616
 theme_override_fonts/normal_font = ExtResource("8_70vka")
 theme_override_font_sizes/normal_font_size = 26
 text = "EXAMPLE"
+
+[node name="Amnt" type="RichTextLabel" parent="CanvasLayer/Convert" unique_id=1087883999]
+offset_left = -109.40173
+offset_top = 194.8718
+offset_right = 367.52136
+offset_bottom = 271.7949
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 20
+text = "EXAMPLE"
+
+[node name="plus" type="TextureButton" parent="CanvasLayer/Convert" unique_id=1546821516]
+offset_left = -355.55566
+offset_top = -46.15384
+offset_right = -276.0685
+offset_bottom = 33.333313
+texture_normal = ExtResource("16_ikqpi")
+stretch_mode = 0
+
+[node name="minus" type="TextureButton" parent="CanvasLayer/Convert" unique_id=25296450]
+offset_left = 277.77783
+offset_top = -46.15384
+offset_right = 357.265
+offset_bottom = 33.333313
+texture_normal = ExtResource("17_cybgu")
+stretch_mode = 0
+
+[node name="xone" type="TextureButton" parent="CanvasLayer/Convert" unique_id=1068375242]
+offset_left = -358.1197
+offset_top = 51.28189
+offset_right = -196.68384
+offset_bottom = 131.99982
+texture_normal = ExtResource("18_wdxbp")
+stretch_mode = 0
+
+[node name="xten" type="TextureButton" parent="CanvasLayer/Convert" unique_id=714506627]
+offset_left = -188.88892
+offset_top = 51.281982
+offset_right = -27.453064
+offset_bottom = 131.99991
+texture_normal = ExtResource("19_on6n6")
+stretch_mode = 0
+
+[node name="xhundred" type="TextureButton" parent="CanvasLayer/Convert" unique_id=1181483716]
+offset_left = -19.658173
+offset_top = 51.281967
+offset_right = 141.77768
+offset_bottom = 131.9999
+texture_normal = ExtResource("20_x3ega")
+stretch_mode = 0
+
+[node name="max" type="TextureButton" parent="CanvasLayer/Convert" unique_id=1151357578]
+offset_left = 149.5726
+offset_top = 51.281967
+offset_right = 252.13693
+offset_bottom = 102.56413
+texture_normal = ExtResource("21_dcudo")
+stretch_mode = 0
+
+[node name="half" type="TextureButton" parent="CanvasLayer/Convert" unique_id=623595262]
+offset_left = 259.82907
+offset_top = 51.282074
+offset_right = 362.39316
+offset_bottom = 102.56412
+texture_normal = ExtResource("22_307no")
+stretch_mode = 0
+
+[node name="Ctext" type="RichTextLabel" parent="CanvasLayer/Convert" unique_id=55563052]
+offset_left = -268.3761
+offset_top = -46.15384
+offset_right = 270.08545
+offset_bottom = 33.333344
+theme_override_fonts/normal_font = ExtResource("5_ipu61")
+theme_override_font_sizes/normal_font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Change" type="RichTextLabel" parent="CanvasLayer/Convert" unique_id=1083594567]
+offset_left = 152.13669
+offset_top = 110.25644
+offset_right = 362.39316
+offset_bottom = 148.71793
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 20
+text = "EXAMPLE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Shop" type="TextureButton" parent="CanvasLayer" unique_id=1647174120]
 anchors_preset = -1
@@ -193,6 +288,7 @@ texture_normal = ExtResource("16_ihbck")
 stretch_mode = 0
 
 [node name="Weather Info" type="Sprite2D" parent="CanvasLayer" unique_id=848353339]
+visible = false
 position = Vector2(154, 96)
 scale = Vector2(1.3333334, 1.3333334)
 texture = ExtResource("17_vnsdt")
@@ -207,5 +303,19 @@ texture = ExtResource("17_vnsdt")
 [connection signal="button_up" from="CanvasLayer/Convert/Close Convert" to="." method="_on_close_convert_button_up"]
 [connection signal="button_down" from="CanvasLayer/Convert/Convert Confirm" to="." method="_on_convert_confirm_button_down"]
 [connection signal="button_up" from="CanvasLayer/Convert/Convert Confirm" to="." method="_on_convert_confirm_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/plus" to="." method="_on_plus_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/plus" to="." method="_on_plus_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/minus" to="." method="_on_minus_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/minus" to="." method="_on_minus_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/xone" to="." method="_on_xone_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/xone" to="." method="_on_xone_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/xten" to="." method="_on_xten_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/xten" to="." method="_on_xten_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/xhundred" to="." method="_on_xhundred_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/xhundred" to="." method="_on_xhundred_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/max" to="." method="_on_max_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/max" to="." method="_on_max_button_up"]
+[connection signal="button_down" from="CanvasLayer/Convert/half" to="." method="_on_half_button_down"]
+[connection signal="button_up" from="CanvasLayer/Convert/half" to="." method="_on_half_button_up"]
 [connection signal="button_down" from="CanvasLayer/Shop" to="." method="_on_shop_button_down"]
 [connection signal="button_up" from="CanvasLayer/Shop" to="." method="_on_shop_button_up"]

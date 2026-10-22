@@ -13,6 +13,17 @@ const save_path = "user://userdata.save"
 @onready var rain: Sprite2D = $CanvasLayer/Stats/Rain
 @onready var cloud: Sprite2D = $CanvasLayer/Stats/Cloudy
 @onready var shopopen: TextureButton = $CanvasLayer/Shop
+@onready var xone:TextureButton = $CanvasLayer/Convert/xone
+@onready var xten:TextureButton = $CanvasLayer/Convert/xten
+@onready var xhundred: TextureButton = $CanvasLayer/Convert/xhundred
+@onready var xmax : TextureButton = $CanvasLayer/Convert/max
+@onready var xhalf: TextureButton = $CanvasLayer/Convert/half
+@onready var xplus: TextureButton = $CanvasLayer/Convert/plus
+@onready var xminus : TextureButton = $CanvasLayer/Convert/minus
+
+
+
+
 
 
 
@@ -20,6 +31,9 @@ var score = 0
 var wood = 0
 var weather = "Nothing"
 var weathermulti = 1.0
+var change = 1
+var converttext = 0
+
 
 var rarities = {"Cloudy" : 1000,
 				"Sunny" : 500,
@@ -85,6 +99,13 @@ func _ready():
 	closeconvert.pivot_offset = closeconvert.size / 2
 	convertconfirm.pivot_offset = convertconfirm.size / 2
 	shopopen.pivot_offset = shopopen.size / 2
+	xplus.pivot_offset = xplus.size / 2
+	xminus.pivot_offset = xminus.size / 2
+	xone.pivot_offset = xone.size / 2
+	xten.pivot_offset = xten.size / 2
+	xhundred.pivot_offset = xhundred.size / 2
+	xmax.pivot_offset = xmax.size / 2
+	xhalf.pivot_offset = xhalf.size / 2
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	hconverttree()
@@ -95,8 +116,11 @@ func _ready():
 
 func sconverttree():
 	convertdg.visible = true
+	change = 1
+	converttext = 0
 	$CanvasLayer/Convert/Info.text = "SCORE = " + str(score) + " and LOGS = " + str(wood) + "\nWeather = " + str(weather) + " , Multiplier = " + str(weathermulti)
-
+	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
+	$CanvasLayer/Convert/Ctext.text = str(converttext)
 
 
 func hconverttree():
@@ -132,6 +156,7 @@ func _on_save_upd_timeout():
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	save_data()
+	$CanvasLayer/Convert/Amnt.text = "Logs Earned = " + str(converttext * weathermulti)
 
 
 
@@ -166,6 +191,10 @@ func _on_convert_confirm_button_up():
 	var tween = get_tree().create_tween()
 	tween.tween_property(convertconfirm , "scale" , Vector2(1 , 1), .1)
 	$CanvasLayer/Convert/Info.text = "SCORE = " + str(score) + " and LOGS = " + str(wood) + "\nWeather = " + str(weather) + " , Multiplier = " + str(weathermulti)
+	score -= converttext
+	wood += (converttext * weathermulti)
+	converttext = 0
+	$CanvasLayer/Convert/Ctext.text = str(converttext)
 
 
 
@@ -246,3 +275,137 @@ func _on_shop_button_down():
 func _on_shop_button_up():
 	var tween = get_tree().create_tween()
 	tween.tween_property(shopopen , "scale" , Vector2(1 , 1), .1)
+
+
+
+
+
+func _on_plus_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xplus , "scale", Vector2(.9 , .9),.1)
+
+
+
+
+
+
+func _on_plus_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xplus , "scale" ,Vector2(1,1),.1)
+	if score >= converttext:
+		converttext += change
+		$CanvasLayer/Convert/Ctext.text = str(converttext)
+
+
+
+
+
+
+
+func _on_minus_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xminus , "scale" , Vector2(.9 , .9),.1)
+
+
+
+
+
+func _on_minus_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xminus , "scale" , Vector2(1 , 1) , .1)
+	if converttext >= change:
+		converttext -= change
+		$CanvasLayer/Convert/Ctext.text = str(converttext)
+
+
+
+
+
+func _on_xone_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xone , "scale" , Vector2(.9 , .9) , .1)
+
+
+
+
+
+func _on_xone_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xone , "scale" , Vector2(1 , 1),.1)
+	change = 1
+	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
+
+
+
+
+
+func _on_xten_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xten , "scale" , Vector2(.9 , .9) ,.1)
+
+
+
+
+
+
+func _on_xten_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xten , "scale" , Vector2(1 , 1) , .1)
+	change = 10
+	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
+
+
+
+
+
+func _on_xhundred_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xhundred , "scale" , Vector2(.9 , .9) , .1)
+
+
+
+
+
+
+func _on_xhundred_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xhundred , "scale" , Vector2(1 , 1) ,.1)
+	change = 100
+	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
+
+
+
+
+
+func _on_max_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xmax , "scale" , Vector2(.9 ,.9),.1)
+
+
+
+
+
+func _on_max_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xmax , "scale" , Vector2(1 , 1), .1)
+	change = score
+	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
+
+
+
+
+
+func _on_half_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xhalf , "scale" , Vector2(.9 ,.9) , .1)
+
+
+
+
+
+
+func _on_half_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(xhalf , "scale" , Vector2(1 , 1) ,.1)
+	change = (score / 2)
+	$CanvasLayer/Convert/Change.text = "Change By = " + str(change)
