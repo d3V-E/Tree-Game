@@ -386,35 +386,174 @@ theme_override_font_sizes/normal_font_size = 22
 text = "SHOP"
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Shopline" unique_id=884708750]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Shopline" unique_id=1301177699]
 offset_left = -101.0
 offset_top = -112.0
-offset_right = 103.0
+offset_right = 102.0
 offset_bottom = 152.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
-[node name="Click + 1" type="Sprite2D" parent="CanvasLayer/Shopline/VBoxContainer" unique_id=1847787695]
-position = Vector2(101, 59)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Shopline/ScrollContainer" unique_id=884708750]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control 1" type="Control" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer" unique_id=1634692149]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+
+[node name="Click + 1" type="Sprite2D" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1" unique_id=1847787695]
+position = Vector2(100, 60)
 texture = ExtResource("27_x3ega")
 
-[node name="+1 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/VBoxContainer/Click + 1" unique_id=1325316510]
+[node name="+1 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1" unique_id=1325316510]
 offset_left = -98.0
 offset_top = -56.0
 offset_right = 98.0
 offset_bottom = -22.0
 theme_override_fonts/normal_font = ExtResource("8_70vka")
-theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/normal_font_size = 18
 text = "+ 1 Click Power"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Cost" type="RichTextLabel" parent="CanvasLayer/Shopline/VBoxContainer/Click + 1" unique_id=1093624889]
+[node name="Cost" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1" unique_id=1093624889]
 offset_left = -96.0
-offset_top = -24.0
+offset_top = -21.0
 offset_right = 98.0
-offset_bottom = 1.0
+offset_bottom = 4.0
 theme_override_fonts/normal_font = ExtResource("8_70vka")
 theme_override_font_sizes/normal_font_size = 18
 text = "COST = 75"
 
-[node name="Buy1" type="TextureButton" parent="CanvasLayer/Shopline/VBoxContainer/Click + 1" unique_id=600202110]
+[node name="Amnt Owned Header" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1" unique_id=1040095986]
+offset_left = -95.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "Amount Owned"
+
+[node name="Amnt Owned" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1" unique_id=771847579]
+offset_left = -95.0
+offset_top = 33.0
+offset_right = 9.0
+offset_bottom = 52.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "0"
+
+[node name="Buy1" type="TextureButton" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1" unique_id=600202110]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 93.0
+offset_bottom = 52.0
+texture_normal = ExtResource("28_dcudo")
+stretch_mode = 0
+
+[node name="Control 2" type="Control" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer" unique_id=2075644477]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+
+[node name="Click + 10" type="Sprite2D" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2" unique_id=1895605308]
+position = Vector2(100, 60)
+texture = ExtResource("27_x3ega")
+
+[node name="+10 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10" unique_id=259484639]
+offset_left = -98.0
+offset_top = -56.0
+offset_right = 98.0
+offset_bottom = -22.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "+ 10 Click Power"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost 10" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10" unique_id=1085638454]
+offset_left = -96.0
+offset_top = -21.0
+offset_right = 98.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "COST = 650"
+
+[node name="Amnt Owned Header 10" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10" unique_id=610843703]
+offset_left = -95.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "Amount Owned"
+
+[node name="Amnt Owned 10" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10" unique_id=888639479]
+offset_left = -95.0
+offset_top = 33.0
+offset_right = 9.0
+offset_bottom = 52.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "0"
+
+[node name="Buy10" type="TextureButton" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10" unique_id=285459341]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 93.0
+offset_bottom = 52.0
+texture_normal = ExtResource("28_dcudo")
+stretch_mode = 0
+
+[node name="Control 3" type="Control" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer" unique_id=1115617966]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+
+[node name="Click + 100" type="Sprite2D" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3" unique_id=959015702]
+position = Vector2(100, 60)
+texture = ExtResource("27_x3ega")
+
+[node name="+100 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100" unique_id=296076538]
+offset_left = -98.0
+offset_top = -56.0
+offset_right = 98.0
+offset_bottom = -22.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "+ 100 Click Power"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost 100" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100" unique_id=609394544]
+offset_left = -96.0
+offset_top = -21.0
+offset_right = 98.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "COST = 6000"
+
+[node name="Amnt Owned Header 100" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100" unique_id=1239914121]
+offset_left = -95.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "Amount Owned"
+
+[node name="Amnt Owned 100" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100" unique_id=1965798597]
+offset_left = -95.0
+offset_top = 33.0
+offset_right = 9.0
+offset_bottom = 52.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "0"
+
+[node name="Buy100" type="TextureButton" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100" unique_id=1205169505]
 offset_left = 13.0
 offset_top = 12.0
 offset_right = 93.0
@@ -450,5 +589,9 @@ stretch_mode = 0
 [connection signal="button_up" from="CanvasLayer/Shop" to="." method="_on_shop_button_up"]
 [connection signal="button_down" from="CanvasLayer/Shopline/Shop Close" to="." method="_on_shop_close_button_down"]
 [connection signal="button_up" from="CanvasLayer/Shopline/Shop Close" to="." method="_on_shop_close_button_up"]
-[connection signal="button_down" from="CanvasLayer/Shopline/VBoxContainer/Click + 1/Buy1" to="." method="_on_buy_1_button_down"]
-[connection signal="button_up" from="CanvasLayer/Shopline/VBoxContainer/Click + 1/Buy1" to="." method="_on_buy_1_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Buy1" to="." method="_on_buy_1_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Buy1" to="." method="_on_buy_1_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Buy10" to="." method="_on_buy_10_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Buy10" to="." method="_on_buy_10_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100" to="." method="_on_buy_100_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100" to="." method="_on_buy_100_button_up"]

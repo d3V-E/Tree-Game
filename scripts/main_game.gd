@@ -25,9 +25,9 @@ const save_path = "user://userdata.save"
 @onready var cloudyb : Sprite2D = $CanvasLayer/Cloudy
 @onready var shopanim: AnimationPlayer = $CanvasLayer/Shopline/AnimationPlayer
 @onready var shopclose: TextureButton = $"CanvasLayer/Shopline/Shop Close"
-@onready var buyone: TextureButton = $"CanvasLayer/Shopline/VBoxContainer/Click + 1/Buy1"
-
-
+@onready var buyone: TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Buy1"
+@onready var buyten: TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Buy10"
+@onready var buyhundred : TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100"
 
 
 
@@ -40,7 +40,11 @@ var change = 1
 var converttext = 0
 var click = 1
 var clickone = 75
-
+var amntowned = 0
+var clickten = 650
+var amntownedten = 0
+var clickhundred = 6000
+var amntownedhundred = 0
 
 var rarities = {"Cloudy" : 1000,
 				"Sunny" : 500,
@@ -115,6 +119,8 @@ func _ready():
 	xhalf.pivot_offset = xhalf.size / 2
 	shopclose.pivot_offset = shopclose.size / 2
 	buyone.pivot_offset = buyone.size / 2
+	buyten.pivot_offset = buyten.size / 2
+	buyhundred.pivot_offset = buyhundred.size / 2
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	hconverttree()
@@ -471,4 +477,55 @@ func _on_buy_1_button_up():
 		wood -= clickone
 		click += 1
 		clickone += 25
-		$"CanvasLayer/Shopline/VBoxContainer/Click + 1/Cost".text ="COST = " + str(clickone)
+		amntowned += 1
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Cost".text ="COST = " + str(clickone)
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Amnt Owned".text = str(amntowned)
+
+
+
+
+
+
+func _on_buy_10_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buyten , "scale" , Vector2(.9 ,.9) ,.1)
+
+
+
+
+
+
+func _on_buy_10_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buyten , "scale" , Vector2(1 , 1), .1)
+	if wood >= clickten:
+		wood -= clickten
+		click += 10
+		clickten += 175
+		amntownedten += 1
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Cost 10".text ="COST = " + str(clickten)
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Amnt Owned 10".text = str(amntownedten)
+
+
+
+
+
+
+func _on_buy_100_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buyhundred , "scale" , Vector2(.9 ,.9), .1)
+
+
+
+
+
+func _on_buy_100_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buyhundred , "scale" , Vector2(1 , 1), .1)
+	if wood >= clickhundred:
+		wood -= clickhundred
+		click += 100
+		clickhundred += 1250
+		amntownedhundred += 1
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Cost 100".text = "COST = " + str(clickhundred)
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Amnt Owned 100".text = str(amntownedhundred)
