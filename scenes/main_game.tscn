@@ -561,6 +561,60 @@ offset_bottom = 52.0
 texture_normal = ExtResource("28_dcudo")
 stretch_mode = 0
 
+[node name="Control 4" type="Control" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer" unique_id=2138942948]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+
+[node name="Click + 1000" type="Sprite2D" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4" unique_id=903711937]
+position = Vector2(100, 60)
+texture = ExtResource("27_x3ega")
+
+[node name="+1000 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000" unique_id=198964277]
+offset_left = -98.0
+offset_top = -56.0
+offset_right = 98.0
+offset_bottom = -22.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "+ 1000 Click Power"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost 1000" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000" unique_id=120385369]
+offset_left = -96.0
+offset_top = -21.0
+offset_right = 98.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "COST = 55000"
+
+[node name="Amnt Owned Header 100" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000" unique_id=1825977394]
+offset_left = -95.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "Amount Owned"
+
+[node name="Amnt Owned 1000" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000" unique_id=500684340]
+offset_left = -95.0
+offset_top = 33.0
+offset_right = 9.0
+offset_bottom = 52.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "0"
+
+[node name="Buy1000" type="TextureButton" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000" unique_id=1052313734]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 93.0
+offset_bottom = 52.0
+texture_normal = ExtResource("28_dcudo")
+stretch_mode = 0
+
 [connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
 [connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
 [connection signal="timeout" from="CanvasLayer/Tree/SaveUPD" to="." method="_on_save_upd_timeout"]
@@ -595,3 +649,5 @@ stretch_mode = 0
 [connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Buy10" to="." method="_on_buy_10_button_up"]
 [connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100" to="." method="_on_buy_100_button_down"]
 [connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100" to="." method="_on_buy_100_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Buy1000" to="." method="_on_buy_1000_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Buy1000" to="." method="_on_buy_1000_button_up"]
