@@ -29,6 +29,9 @@ const save_path = "user://userdata.save"
 @onready var buyten: TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Buy10"
 @onready var buyhundred : TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100"
 @onready var buyk : TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Buy1000"
+@onready var buytenk : TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Buy10000"
+@onready var changebox: Sprite2D = $CanvasLayer/Change
+
 
 
 
@@ -47,14 +50,26 @@ var clickhundred = 6000
 var amntownedhundred = 0
 var clickk = 55000
 var amntownedk = 0
-
+var clicktenk = 500000
+var amntowned10k = 0
+var damage = "Nothing"
+var loss = 0
 
 
 var rarities = {"Cloudy" : 1000,
 				"Sunny" : 500,
 				"Rain" : 250}
 
+
+var disasters = {"Stolen" : 1000,
+				"Eaten" : 500,
+				"Heavy Tax" : 250,
+				"Raid" : 1,}
+
+
 var rng = RandomNumberGenerator.new()
+var drng = RandomNumberGenerator.new()
+
 
 func get_weather():
 	rng.randomize()
@@ -73,6 +88,23 @@ func get_weather():
 
 
 
+func get_disaster():
+	rng.randomize()
+	
+	var sums = 0
+	
+	for r in disasters:
+		sums += disasters[r]
+		
+	var itemt = rng.randi_range(0 , sums)
+	
+	for r in disasters:
+		if itemt <= disasters[r]:
+			return r
+		itemt -= disasters[r]
+
+
+
 signal score_changed
 signal wood_changed
 
@@ -80,7 +112,18 @@ signal wood_changed
 func save_data():
 	var data = {
 		"score": score,
-		"wood": wood
+		"wood": wood,
+		"click": click,
+		"clickone": clickone,
+		"amntowned": amntowned,
+		"clickten": clickten,
+		"amntownedten": amntownedten,  
+		"clickhundred": clickhundred,  
+		"amntownedhundred": amntownedhundred,   
+		"clickk": clickk,   
+		"amntownedk": amntownedk,  
+		"clicktenk" : clicktenk,   
+		"amntowned10k": amntowned10k
 	}
 	var file = FileAccess.open(save_path , FileAccess.WRITE)
 	file.store_var(data)
@@ -96,12 +139,33 @@ func load_data():
 		if typeof(data) == TYPE_DICTIONARY:
 			score = data.get("score" , 0)
 			wood = data.get("wood" , 0)
+			click = data.get("click" , 1)
+			clickone = data.get("clickone" , 75)
+			amntowned = data.get("amntowned" , 0)
+			clickten = data.get("clickten" , 650)
+			amntownedten = data.get("amntownedten" , 0)
+			clickhundred = data.get("clickhundred" , 6000)
+			amntownedhundred = data.get("amntownedhundred" , 0)
+			clickk = data.get("clickk" , 55000)
+			amntownedk = data.get("amntownedk" , 0)
+			clicktenk = data.get("clicktenk" , 500000)
+			amntowned10k = data.get("amntowned10k" , 0)
 	else:
 		save_data()
 
 
 
-
+func shopdload():
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Cost".text ="COST = " + str(clickone)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 1/Click + 1/Amnt Owned".text = str(amntowned)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Cost 10".text ="COST = " + str(clickten)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 2/Click + 10/Amnt Owned 10".text = str(amntownedten)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Cost 100".text = "COST = " + str(clickhundred)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Amnt Owned 100".text = str(amntownedhundred)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Cost 1000".text = "COST = " + str(clickk)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Amnt Owned 1000".text = str(amntownedk)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Cost 10000".text ="COST = " + str(clicktenk)
+	$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Amnt Owned 10000".text = str(amntowned10k)
 
 
 
@@ -109,6 +173,7 @@ func load_data():
 
 func _ready():
 	load_data()
+	shopdload()
 	tree.pivot_offset = tree.size / 2
 	convertlog.pivot_offset = convertlog.size / 2
 	closeconvert.pivot_offset = closeconvert.size / 2
@@ -126,6 +191,8 @@ func _ready():
 	buyten.pivot_offset = buyten.size / 2
 	buyhundred.pivot_offset = buyhundred.size / 2
 	buyk.pivot_offset = buyk.size / 2
+	buytenk.pivot_offset = buytenk.size / 2
+	changebox.visible = false
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	hconverttree()
@@ -243,6 +310,10 @@ func _on_close_convert_button_up():
 
 func _on_weather_update_timeout():
 	weatherupd()
+	disastersupd()
+	changebox.visible = true
+	await get_tree().create_timer(1).timeout
+	changebox.visible = false
 
 
 func sunw():
@@ -292,8 +363,28 @@ func weatherupd():
 
 
 
-
-
+func disastersupd():
+	damage = get_disaster()
+	if damage == "Stolen":
+		loss = 100
+		if wood >= loss:
+			wood -= loss
+		$CanvasLayer/Ground/dheader.text = "Your LOGS was stolen , loss = " + str(loss)
+	elif damage == "Eaten":
+		loss = 175
+		if wood >= loss:
+			wood -= loss
+		$CanvasLayer/Ground/dheader.text = "Your LOGS was Eaten By a RAT , loss = " + str(loss)
+	elif damage == "Heavy Tax":
+		loss = 250
+		if wood >= loss:
+			wood -= loss
+		$CanvasLayer/Ground/dheader.text = "Your LOGS was TAXED , loss = " + str(loss)
+	elif damage == "Raid":
+		loss = 750
+		if wood >= loss:
+			wood -= loss
+		$CanvasLayer/Ground/dheader.text = "Your LOGS was RAIDED , loss = " + str(loss)
 
 
 func _on_shop_button_down():
@@ -559,6 +650,26 @@ func _on_buy_1000_button_up():
 		amntownedk += 1
 		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Cost 1000".text = "COST = " + str(clickk)
 		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Amnt Owned 1000".text = str(amntownedk)
-	
-	
-	
+
+
+
+
+
+
+func _on_buy_10000_button_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buytenk , "scale" , Vector2(.9 ,.9) , .1)
+
+
+
+
+func _on_buy_10000_button_up():
+	var tween = get_tree().create_tween()
+	tween.tween_property(buytenk , "scale" , Vector2(1 , 1) ,.1)
+	if wood >= clicktenk:
+		wood -= clicktenk
+		click += 10000
+		clicktenk += 105000
+		amntowned10k += 1
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Cost 10000".text ="COST = " + str(clicktenk)
+		$"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Amnt Owned 10000".text = str(amntowned10k)

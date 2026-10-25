@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://dipm5u63e778m"]
+
+[ext_resource type="Texture2D" uid="uid://co068e173snsi" path="res://assets/Clear background.png" id="1_u7rsi"]
+[ext_resource type="Texture2D" uid="uid://dh6rhr5qawx42" path="res://assets/Ground.png" id="2_i331m"]
+[ext_resource type="Texture2D" uid="uid://de2wmkscsoywt" path="res://assets/Tree.png" id="3_0kdh5"]
+[ext_resource type="FontFile" uid="uid://bvms8h4edljip" path="res://assets/fonts/Quantico-Bold.ttf" id="4_i331m"]
+[ext_resource type="Texture2D" uid="uid://sk6t4siyw0k0" path="res://assets/1.png" id="5_0kdh5"]
+[ext_resource type="Texture2D" uid="uid://cpksypq8dx7p0" path="res://assets/2.png" id="6_sg87u"]
+
+[sub_resource type="Animation" id="Animation_sg87u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Tree:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.038107447]
+}
+
+[sub_resource type="Animation" id="Animation_2525w"]
+resource_name = "initial"
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_2l3yw"]
+resource_name = "start"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Tree:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.038107447, 0.038397245]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2525w"]
+_data = {
+&"RESET": SubResource("Animation_sg87u"),
+&"initial": SubResource("Animation_2525w"),
+&"start": SubResource("Animation_2l3yw")
+}
+
+[sub_resource type="Animation" id="Animation_6vkx6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(130.5, -69.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Start:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(258.5, 367)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Instructions:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(647.5, 306)]
+}
+
+[sub_resource type="Animation" id="Animation_u6lbi"]
+resource_name = "hanimation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.53333336, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(130.5, -69.5), Vector2(130.5, 68.5), Vector2(130.5, 121.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Start:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(258.5, 367), Vector2(258.5, 306)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Instructions:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0009999999, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(647.5, 306), Vector2(506.5, 306)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3dgwj"]
+_data = {
+&"RESET": SubResource("Animation_6vkx6"),
+&"hanimation": SubResource("Animation_u6lbi")
+}
+
+[node name="start_scene" type="Node2D" unique_id=860204242]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=293153326]
+
+[node name="ClearBackground" type="Sprite2D" parent="CanvasLayer" unique_id=1916205669]
+position = Vector2(320, 180)
+texture = ExtResource("1_u7rsi")
+
+[node name="Ground" type="Sprite2D" parent="CanvasLayer" unique_id=1699128317]
+position = Vector2(320, 310)
+texture = ExtResource("2_i331m")
+
+[node name="Tree" type="Sprite2D" parent="CanvasLayer" unique_id=1812525429]
+position = Vector2(320, 180)
+rotation = -0.038107447
+scale = Vector2(2.5859375, 2.5859375)
+texture = ExtResource("3_0kdh5")
+
+[node name="startanim" type="AnimationPlayer" parent="CanvasLayer/Tree" unique_id=760061602]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_2525w")
+autoplay = &"start"
+
+[node name="Game Header" type="RichTextLabel" parent="CanvasLayer" unique_id=43240622]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -249.5
+offset_right = 189.5
+offset_bottom = -181.00006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("4_i331m")
+theme_override_font_sizes/normal_font_size = 46
+text = "TREE CLICKER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="header animation" type="AnimationPlayer" parent="CanvasLayer/Game Header" unique_id=990616892]
+libraries/ = SubResource("AnimationLibrary_3dgwj")
+autoplay = &"hanimation"
+
+[node name="Start" type="TextureButton" parent="CanvasLayer" unique_id=1350940326]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -61.5
+offset_top = 7.0
+offset_right = 61.5
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("5_0kdh5")
+stretch_mode = 0
+
+[node name="Instructions" type="TextureButton" parent="CanvasLayer" unique_id=943209560]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 327.5
+offset_top = -54.0
+offset_right = 450.50024
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("6_sg87u")
+stretch_mode = 0

@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://b4hdna142awsm" path="res://assets/shopline.png" id="26_on6n6"]
 [ext_resource type="Texture2D" uid="uid://1jlsik8bryjy" path="res://assets/Shop Option.png" id="27_x3ega"]
 [ext_resource type="Texture2D" uid="uid://cuukj16u2hh3g" path="res://assets/Buy button.png" id="28_dcudo"]
+[ext_resource type="Texture2D" uid="uid://0uey7sujx03v" path="res://assets/Change.png" id="29_307no"]
 
 [sub_resource type="Animation" id="Animation_x3ega"]
 length = 0.001
@@ -101,6 +102,12 @@ texture = ExtResource("1_s3esy")
 [node name="Ground" type="Sprite2D" parent="CanvasLayer" unique_id=813350954]
 position = Vector2(320, 310)
 texture = ExtResource("2_72e8q")
+
+[node name="dheader" type="RichTextLabel" parent="CanvasLayer/Ground" unique_id=676196871]
+offset_left = -313.0
+offset_top = -10.0
+offset_right = -6.0
+offset_bottom = 43.0
 
 [node name="Score" type="RichTextLabel" parent="CanvasLayer" unique_id=235533328]
 anchors_preset = 5
@@ -615,6 +622,83 @@ offset_bottom = 52.0
 texture_normal = ExtResource("28_dcudo")
 stretch_mode = 0
 
+[node name="Control 5" type="Control" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer" unique_id=1525767587]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+
+[node name="Click + 10000" type="Sprite2D" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5" unique_id=1405345216]
+position = Vector2(100, 60)
+texture = ExtResource("27_x3ega")
+
+[node name="+10000 Click Header" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000" unique_id=373533837]
+offset_left = -98.0
+offset_top = -56.0
+offset_right = 98.0
+offset_bottom = -22.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "+ 10000 Click Power"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost 10000" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000" unique_id=58766461]
+offset_left = -96.0
+offset_top = -21.0
+offset_right = 98.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 18
+text = "COST = 500000"
+
+[node name="Amnt Owned Header 100" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000" unique_id=1555938074]
+offset_left = -95.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "Amount Owned"
+
+[node name="Amnt Owned 10000" type="RichTextLabel" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000" unique_id=237601575]
+offset_left = -95.0
+offset_top = 33.0
+offset_right = 9.0
+offset_bottom = 52.0
+theme_override_fonts/normal_font = ExtResource("8_70vka")
+theme_override_font_sizes/normal_font_size = 13
+text = "0"
+
+[node name="Buy10000" type="TextureButton" parent="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000" unique_id=209953247]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 93.0
+offset_bottom = 52.0
+texture_normal = ExtResource("28_dcudo")
+stretch_mode = 0
+
+[node name="Change" type="Sprite2D" parent="CanvasLayer" unique_id=1090341549]
+visible = false
+position = Vector2(321, 181)
+texture = ExtResource("29_307no")
+
+[node name="change header" type="RichTextLabel" parent="CanvasLayer/Change" unique_id=814024812]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -214.5
+offset_right = -224.0
+offset_bottom = -145.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 23
+text = "WEATHER UPDATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
 [connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
 [connection signal="timeout" from="CanvasLayer/Tree/SaveUPD" to="." method="_on_save_upd_timeout"]
@@ -651,3 +735,5 @@ stretch_mode = 0
 [connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 3/Click + 100/Buy100" to="." method="_on_buy_100_button_up"]
 [connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Buy1000" to="." method="_on_buy_1000_button_down"]
 [connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Buy1000" to="." method="_on_buy_1000_button_up"]
+[connection signal="button_down" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Buy10000" to="." method="_on_buy_10000_button_down"]
+[connection signal="button_up" from="CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Buy10000" to="." method="_on_buy_10000_button_up"]
