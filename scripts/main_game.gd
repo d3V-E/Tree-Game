@@ -31,7 +31,7 @@ const save_path = "user://userdata.save"
 @onready var buyk : TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 4/Click + 1000/Buy1000"
 @onready var buytenk : TextureButton = $"CanvasLayer/Shopline/ScrollContainer/VBoxContainer/Control 5/Click + 10000/Buy10000"
 @onready var changebox: Sprite2D = $CanvasLayer/Change
-
+@onready var lfeffect:CPUParticles2D = $CanvasLayer/Tree/leaf
 
 
 
@@ -107,7 +107,17 @@ func get_disaster():
 
 signal score_changed
 signal wood_changed
-
+signal click_changed
+signal clickone_changed
+signal amntowned_changed
+signal clickten_changed
+signal amntownedten_changed
+signal clickhundred_changed
+signal amntownedhundred_changed
+signal clickk_changed
+signal amntownedk_changed
+signal clicktenk_changed
+signal amntowned10k_changed
 
 func save_data():
 	var data = {
@@ -230,6 +240,7 @@ func _on_tree_button_up():
 		$CanvasLayer/Score.text = str(score)
 		emit_signal("score_changed")
 		save_data()
+		lfeffect.emitting = true
 	else:
 		pass
 
@@ -240,6 +251,18 @@ func _on_tree_button_up():
 func _on_save_upd_timeout():
 	emit_signal("score_changed")
 	emit_signal("wood_changed")
+	emit_signal("click_changed")
+	emit_signal("clickone_changed")
+	emit_signal("amntowned_changed")
+	emit_signal("clickten_changed")
+	emit_signal("amntownedten_changed")
+	emit_signal("clickhundred_changed")
+	emit_signal("amntownedhundred_changed")
+	emit_signal("clickk_changed")
+	emit_signal("amntownedk_changed")
+	emit_signal("clicktenk_changed")
+	emit_signal("amntowned10k_changed")
+	$CanvasLayer/cp.text = "CP = " + str(click)
 	$CanvasLayer/Score.text = str(score)
 	$"CanvasLayer/Stats/Log Count".text = str(wood)
 	save_data()

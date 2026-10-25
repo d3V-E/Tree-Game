@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cpkksi76fyiev" path="res://assets/Stats.png" id="6_ygxny"]
 [ext_resource type="Texture2D" uid="uid://cfxn65feljqts" path="res://assets/Log.png" id="7_wi4c7"]
 [ext_resource type="FontFile" uid="uid://8c6j0tkelvwg" path="res://assets/fonts/SpaceGrotesk-VariableFont_wght.ttf" id="8_70vka"]
+[ext_resource type="Texture2D" uid="uid://dhgjpfrf3a7td" path="res://assets/leaf.png" id="8_rr87q"]
 [ext_resource type="Texture2D" uid="uid://cqcrtco4e1slj" path="res://assets/Convert.png" id="9_o6v7o"]
 [ext_resource type="Texture2D" uid="uid://b5yn2tcxfdrcn" path="res://assets/weather/Cloudy.png" id="9_sp04v"]
 [ext_resource type="Texture2D" uid="uid://c5p22e2er4d3p" path="res://assets/weather/Sunny.png" id="10_ihbck"]
@@ -143,6 +144,16 @@ stretch_mode = 0
 [node name="SaveUPD" type="Timer" parent="CanvasLayer/Tree" unique_id=372278506]
 wait_time = 0.5
 autostart = true
+
+[node name="leaf" type="CPUParticles2D" parent="CanvasLayer/Tree" unique_id=1228185364]
+position = Vector2(95.25, 110.25)
+emitting = false
+amount = 5
+texture = ExtResource("8_rr87q")
+lifetime = 0.5
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(75, 1)
 
 [node name="Stats" type="Sprite2D" parent="CanvasLayer" unique_id=1987372472]
 position = Vector2(104.416664, 46.75)
@@ -698,6 +709,15 @@ theme_override_font_sizes/normal_font_size = 23
 text = "WEATHER UPDATE"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="cp" type="RichTextLabel" parent="CanvasLayer" unique_id=982750944]
+offset_left = 7.0
+offset_top = 92.0
+offset_right = 204.0
+offset_bottom = 117.0
+theme_override_fonts/normal_font = ExtResource("10_wjob3")
+theme_override_font_sizes/normal_font_size = 16
+text = "CP = 1"
 
 [connection signal="button_down" from="CanvasLayer/Tree" to="." method="_on_tree_button_down"]
 [connection signal="button_up" from="CanvasLayer/Tree" to="." method="_on_tree_button_up"]
